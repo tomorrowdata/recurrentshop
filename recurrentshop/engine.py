@@ -423,7 +423,7 @@ class RecurrentModel(Recurrent):
             if type(states_value) not in (list, tuple):
                 states_value = [states_value] * len(self.states)
             assert len(states_value) == len(self.states), 'Your RNN has ' + str(len(self.states)) + ' states, but was provided ' + str(len(states_value)) + ' state values.'
-            if 'numpy' not in type(states_value[0]):
+            if states_value[0].__class__.__module__ != 'numpy':
                 states_value = list(map(np.array, states_value))
             if states_value[0].shape == tuple():
                 for state, val in zip(self.states, states_value):
